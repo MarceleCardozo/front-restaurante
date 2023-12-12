@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Restaurante</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+
+  <body>
+    <h1>Seja bem-vindo ao Restaurante Growdev</h1>
+    <br />
+    <fieldset class="table">
+      <legend>Faça Login</legend>
+      <br />
+      <form onsubmit="logar(event)">
+        <label for="email">Email: </label>
+        <input type="email" name="email" id="email" required />
+        <br />
+        <label for="password">Senha: </label>
+        <input type="password" name="senha" id="senha" required />
+
+        <br />
+        <p id="mensagem"></p>
+        <br />
+
+        <button type="submit" class="btn">Confirmar</button>
+        <button type="reset" class="btnCancela">Cancelar</button>
+      </form>
+    </fieldset>
+  </body>
+
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="./js/index.js"></script>
+</html>
+<!-- deixe aqui seu mouse -->

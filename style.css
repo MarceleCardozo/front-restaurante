@@ -1,0 +1,25 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.table {
+  padding: 5px;
+}
+
+.btn {
+  background-color: rgb(113, 232, 144);
+  color: black;
+  padding: 0.5rem;
+}
+
+.btnCancela {
+  background-color: rgb(238, 78, 78);
+  color: black;
+  padding: 0.5rem;
+}
+
+.btnCancela:hover {
+  background-color: brown;
+}
