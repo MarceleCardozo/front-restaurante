@@ -4,6 +4,10 @@
   box-sizing: border-box;
 }
 
+body {
+  background-color: #808080;
+}
+
 .table {
   padding: 5px;
 }
@@ -22,4 +26,20 @@
 
 .btnCancela:hover {
   background-color: brown;
+}
+
+.tabela {
+  border-collapse: collapse;
+  width: 770px;
+  margin-top: 22px;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
 }

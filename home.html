@@ -4,18 +4,25 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Restaurante Home</title>
+    <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
     <fieldset>
-      <form id="">
+      <form onsubmit="buscarPrato(event)" id="formulario">
         <label for="busca">Buscar Prato: </label>
         <input type="search" name="busca" id="busca" />
-        <button type="submit">Confirma</button>
-        <button type="reset">Cancelar</button>
+        <button type="submit" class="btn">Confirma</button>
+        <button type="reset" class="btnCancela">Cancelar</button>
       </form>
     </fieldset>
+    <table class="tabela" id="tabela">
+      <tr>
+        <th>Nome</th>
+        <th>Descrição</th>
+        <th>Preço</th>
+      </tr>
+    </table>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="./js/home.js"></script>
   </body>
-
-  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-  <script src="./js/home.js"></script>
 </html>
