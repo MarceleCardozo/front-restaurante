@@ -4,42 +4,20 @@
   box-sizing: border-box;
 }
 
-body {
-  background-color: #808080;
+.btn-editar {
+  background-color: #0d6efd !important;
+  color: white !important;
 }
 
-.table {
-  padding: 5px;
+.btn-editar:hover {
+  background-color: #0c62e4 !important;
 }
 
-.btn {
-  background-color: rgb(113, 232, 144);
-  color: black;
-  padding: 0.5rem;
+.btn-apagar {
+  background-color: #5c636a !important;
+  color: white !important;
 }
 
-.btnCancela {
-  background-color: rgb(238, 78, 78);
-  color: black;
-  padding: 0.5rem;
-}
-
-.btnCancela:hover {
-  background-color: brown;
-}
-
-.tabela {
-  border-collapse: collapse;
-  width: 770px;
-  margin-top: 22px;
-}
-
-td, th {
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 8px;
-}
-
-tr:nth-child(even) {
-  background-color: #dddddd;
+.btn-apagar:hover {
+  background-color: #535a61 !important;
 }

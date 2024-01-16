@@ -1,4 +1,6 @@
 const tabela = document.getElementById("tabela");
+
+tabela.classList.add("table-striped");
 const menuPaginacao = document.getElementById("menu_paginacao");
 let pagina = 1;
 
@@ -8,33 +10,39 @@ const instance = axios.create({
 
 // checo se existe um id no localStorage, se não existir eu não estou logado
 if (localStorage.getItem("ID Usuario") === null) {
-  window.location.assign("http://127.0.0.1:5500/")
+  window.location.assign("http://127.0.0.1:5500/");
 }
 
 async function atualizarPrato(id) {
-  const novoNomePrato = window.prompt('Insira o novo nome do prato.')
-  const novaDescricaoPrato = window.prompt('Insira a nova descrição do prato.')
-  const novoPrecoPrato = window.prompt('Insira o novo preço do prato.')
+  const novoNomePrato = window.prompt("Insira o novo nome do prato.");
+  const novaDescricaoPrato = window.prompt("Insira a nova descrição do prato.");
+  const novoPrecoPrato = window.prompt("Insira o novo preço do prato.");
 
-  await instance.put(`/pratos/${id}`, {
-    nome: novoNomePrato, descricao: novaDescricaoPrato, preco: novoPrecoPrato
-  },{
-    headers: {
-      'authorization': localStorage.getItem("ID Usuario")
+  await instance.put(
+    `/pratos/${id}`,
+    {
+      nome: novoNomePrato,
+      descricao: novaDescricaoPrato,
+      preco: novoPrecoPrato,
+    },
+    {
+      headers: {
+        authorization: localStorage.getItem("ID Usuario"),
+      },
     }
-  })
+  );
 
-  carregarPratos()
+  carregarPratos();
 }
 
 async function apagarPrato(id) {
-  await instance.delete(`/pratos/${id}`,{
+  await instance.delete(`/pratos/${id}`, {
     headers: {
-      'authorization': localStorage.getItem("ID Usuario")
-    }
-  })
+      authorization: localStorage.getItem("ID Usuario"),
+    },
+  });
 
-  carregarPratos()
+  carregarPratos();
 }
 
 function adicionarPratosTabela(pratos) {
@@ -48,39 +56,41 @@ function adicionarPratosTabela(pratos) {
   }
 
   pratos.forEach((prato) => {
-    const linha = document.createElement('tr')
+    const linha = document.createElement("tr");
 
-    const celulaNome = document.createElement('td')
-    celulaNome.innerHTML = prato.nome
+    const celulaNome = document.createElement("td");
+    celulaNome.innerHTML = prato.nome;
 
-    const celulaDescricao = document.createElement('td')
-    celulaDescricao.innerHTML = prato.descricao
+    const celulaDescricao = document.createElement("td");
+    celulaDescricao.innerHTML = prato.descricao;
 
-    const celulaPreco = document.createElement('td')
-    celulaPreco.innerHTML = prato.preco
-    
-    const celulaEditar = document.createElement('td')
-    const botaoEditar = document.createElement('button')
-    botaoEditar.innerHTML = 'Editar'
+    const celulaPreco = document.createElement("td");
+    celulaPreco.innerHTML = prato.preco;
+
+    const celulaEditar = document.createElement("td");
+    const botaoEditar = document.createElement("button");
+    botaoEditar.innerHTML = "Editar";
+    botaoEditar.classList.add("btn", "btn-editar", "my-2");
     // Usamos uma arrow function pra que a função seja executada apenas no click
     // Não quando o código rodar
-    botaoEditar.addEventListener('click', () => atualizarPrato(prato.id))
-    celulaEditar.appendChild(botaoEditar)
+    botaoEditar.addEventListener("click", () => atualizarPrato(prato.id));
+    celulaEditar.appendChild(botaoEditar);
 
-    const celulaApagar = document.createElement('td')
-    const botaoApagar = document.createElement('button')
-    botaoApagar.innerHTML = 'Apagar'
-    botaoApagar.addEventListener('click', () => apagarPrato(prato.id))
-    celulaApagar.appendChild(botaoApagar)
+    const celulaApagar = document.createElement("td");
+    const botaoApagar = document.createElement("button");
+    botaoApagar.innerHTML = "Apagar";
+    botaoApagar.classList.add("btn", "btn-apagar", "my-2");
+    botaoApagar.addEventListener("click", () => apagarPrato(prato.id));
+    celulaApagar.appendChild(botaoApagar);
 
-    linha.appendChild(celulaNome)
-    linha.appendChild(celulaDescricao)
-    linha.appendChild(celulaPreco)
-    linha.appendChild(celulaEditar)
-    linha.appendChild(celulaApagar)
+    linha.appendChild(celulaNome);
+    linha.appendChild(celulaDescricao);
+    linha.appendChild(celulaPreco);
+    linha.appendChild(celulaEditar);
+    linha.appendChild(celulaApagar);
 
-    tabela.appendChild(linha)
-  })
+    tabela.appendChild(linha);
+  });
 }
 
 async function buscarPrato(event) {
@@ -95,7 +105,7 @@ async function buscarPrato(event) {
   // tratamento de códigos que podem não ser totalmente
   // atendidos e gerarem alguma exceção/erro.
   try {
-    carregarPratos(busca)
+    carregarPratos(busca);
   } catch (error) {
     //se der errado envia 'credenciais inváliodas' direto no html
     mensagem.setAttribute("style", "color: red; font-size:25px;");
@@ -114,32 +124,38 @@ async function criarPrato(event) {
   const descricao = event.srcElement.descricao.value;
   const preco = event.srcElement.preco.value;
 
-  const resposta = await instance.post('/pratos', {
-    nome, descricao, preco
-  },{
-    headers: {
-      'authorization': localStorage.getItem("ID Usuario")
+  const resposta = await instance.post(
+    "/pratos",
+    {
+      nome,
+      descricao,
+      preco,
+    },
+    {
+      headers: {
+        authorization: localStorage.getItem("ID Usuario"),
+      },
     }
-  })
+  );
 
-  const pratos = resposta.data
-  adicionarPratosTabela(pratos)
+  const pratos = resposta.data;
+  adicionarPratosTabela(pratos);
 }
 
 // carrega pratos do backend
 async function carregarPratos(busca) {
-  let url = `/pratos`
+  let url = `/pratos`;
 
   if (busca) {
-    url += `?nome=${busca}&pagina=1`
+    url += `?nome=${busca}&pagina=1`;
   } else {
-    url += `?pagina=${pagina}`
+    url += `?pagina=${pagina}`;
   }
 
-  const resposta = await instance.get(url)
-  const pratos = resposta.data.pratos
+  const resposta = await instance.get(url);
+  const pratos = resposta.data.pratos;
 
-  adicionarPratosTabela(pratos)
+  adicionarPratosTabela(pratos);
 }
 
 function voltar() {
@@ -152,22 +168,23 @@ function proximo() {
   carregarPratos();
 }
 
-
 function criarMenuPaginacao() {
-  const botaoAnterior = document.createElement('button')
-  botaoAnterior.innerHTML = 'Anterior'
-  botaoAnterior.addEventListener('click', voltar)
+  const botaoAnterior = document.createElement("button");
+  botaoAnterior.innerHTML = "Anterior";
+  botaoAnterior.classList.add("btn-editar");
+  botaoAnterior.addEventListener("click", voltar);
 
-  const botaoProximo = document.createElement('button')
-  botaoProximo.innerHTML = 'Próximo'
-  botaoProximo.addEventListener('click', proximo)
+  const botaoProximo = document.createElement("button");
+  botaoProximo.innerHTML = "Próximo";
+  botaoProximo.classList.add("btn-apagar");
+  botaoProximo.addEventListener("click", proximo);
 
-  menuPaginacao.appendChild(botaoAnterior)
-  menuPaginacao.appendChild(botaoProximo)
+  menuPaginacao.appendChild(botaoAnterior);
+  menuPaginacao.appendChild(botaoProximo);
 }
 
 // chamo a função para buscar dados do backend
-carregarPratos()
+carregarPratos();
 
 // chamo a função para criar o menu de paginação
-criarMenuPaginacao()
+criarMenuPaginacao();
