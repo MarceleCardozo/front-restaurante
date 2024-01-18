@@ -45,7 +45,23 @@
     <!-- CRIAR PRATO -->
 
     <fieldset>
-      <div class="container border border-primary py-3">
+      <div class="container">
+        <div class="row">
+          <div class="col d-flex justify-content-center mt-3">
+            <!-- Button trigger modal -->
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+            >
+              Cadastrar Prato
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- <div class="container border border-primary py-3">
         <form onsubmit="criarPrato(event)" id="formulario">
           <div class="row">
             <div class="col-4 mb-3">
@@ -76,7 +92,7 @@
             </div>
           </div>
         </form>
-      </div>
+      </div> -->
     </fieldset>
 
     <div class="container">
@@ -98,6 +114,84 @@
       <div class="row">
         <div class="col">
           <div class="d-flex justify-content-center" id="menu_paginacao"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="exampleModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">
+              Cadastrar Prato
+            </h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+
+          <form onsubmit="criarPrato(event)" id="formulario">
+            <div class="modal-body">
+              <div class="row">
+                <div class="col-12 col-sm-4 mb-3">
+                  <label for="nome" class="form-label">Nome: </label>
+                  <input
+                    type="search"
+                    name="nome"
+                    id="nome"
+                    class="form-control"
+                  />
+                </div>
+
+                <div class="col-12 col-sm-6 mb-3">
+                  <label for="descricao" class="form-label">Descrição: </label>
+                  <input
+                    type="text"
+                    name="descricao"
+                    id="descricao"
+                    class="form-control"
+                  />
+                </div>
+
+                <div class="col-12 col-sm-2 mb-3">
+                  <label for="preco" class="form-label">Preço: </label>
+                  <input
+                    type="text"
+                    name="preco"
+                    id="preco"
+                    class="form-control"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Fechar
+              </button>
+              <button
+                type="submit"
+                class="btn btn-primary"
+                data-bs-dismiss="modal"
+              >
+                Confirmar
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </div>

@@ -10,7 +10,7 @@ const instance = axios.create({
 
 // checo se existe um id no localStorage, se não existir eu não estou logado
 if (localStorage.getItem("ID Usuario") === null) {
-  window.location.assign("http://127.0.0.1:5500/");
+  window.location.assign("http://127.0.0.1:5501/");
 }
 
 async function atualizarPrato(id) {
@@ -115,6 +115,7 @@ async function buscarPrato(event) {
 }
 
 async function criarPrato(event) {
+  console.log(event);
   //serve evitar o comportamento padrão do formulário
   //assim que o formulário é enviado, reseta a página, preventDefault() evita que isso aconteça
   event.preventDefault();
